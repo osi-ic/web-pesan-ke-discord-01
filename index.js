@@ -6,15 +6,13 @@ const {
   WebhookClient,
 } = require("discord.js");
 const express = require("express");
+require("dotenv").config();
 
 //ExpressJS
-const config = require("./config.json");
 const app = express();
 const port = 3000;
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
-const webhookClient = new WebhookClient({
-  url: config.webhook || process.env.webhook,
-});
+const webhookClient = new WebhookClient({ url: process.env.webhook });
 
 app.use(express.urlencoded());
 
@@ -74,4 +72,4 @@ const webhookSend = (pesan, nama) => {
 //<========== End DiscordJS ==========>
 
 // DiscordJS login
-client.login(config.token || process.env.token);
+client.login(process.env.token);
